@@ -34,6 +34,14 @@ add_four_cell_row(
 )
 
 # Add 5 Cell Row - Align Center
+add_five_cell_row(
+    new_pdf,
+    cell1_text="Add 5 Cell Row - Cell 1 - Align Center",
+    cell2_text="Add 5 Cell Row - Cell 2 - Align Center",
+    cell3_text="Add 5 Cell Row - Cell 3 - Align Center",
+    cell4_text="Add 5 Cell Row - Cell 4 - Align Center",
+    cell5_text="Add 5 Cell Row - Cell 5 - Align Center",
+)
 
 # Add 1 Cell Row - Align Left
 add_one_cell_row(new_pdf, "Add 1 Cell Row - Align Left", align="L")
@@ -136,4 +144,4 @@ add_three_cell_row(
 )
 
 # Export PDF
-export_pdf(new_pdf, "test.pdf")
+export_pdf(new_pdf, "example.pdf")
