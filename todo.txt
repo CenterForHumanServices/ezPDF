@@ -1,7 +1,3 @@
-- Create new page
-- Create full width row
-- Create 3-column row
-- Create 4-column row
 - Create 5-column row
 - Select from table based on column? (Pandas?)
 - Select from table based on row? (Pandas?)

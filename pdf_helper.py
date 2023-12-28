@@ -83,43 +83,231 @@ def add_one_cell_row(
     )
 
 
-def add_two_cell_row(pdf, cell1, cell2, align="C", page_width=210, margin=10):
+def add_two_cell_row(
+        pdf,
+        cell1_text,
+        cell2_text,
+        cell1_align="C",
+        cell2_align="C",
+        page_width=210,
+        margin=10,
+        border=1,
+        new_line=1,
+        cell1_fill=False,
+        cell2_fill=False,
+        cell_height=20,
+        cell1_width=0.5,
+        cell2_width=0.5):
     """_summary_
 
     Args:
         pdf (_type_): _description_
         cell1 (_type_): _description_
         cell2 (_type_): _description_
-        align (str): _description_
-    """
-    pass
-
-
-def add_three_cell_row(pdf, cell1, cell2, cell3, align="C", page_width=210, margin=10):
-    """_summary_
-
-    Args:
-        pdf (_type_): _description_
-        cell1 (_type_): _description_
-        cell2 (_type_): _description_
-        cell3 (_type_): _description_
-        align (str): _description_
-    """
-    pass
-
-
-def add_four_cell_row(pdf, cell1, cell2, cell3, cell4, align="C", page_width=210, margin=10):
-    """_summary_
-
-    Args:
-        pdf (_type_): _description_
-        cell1 (_type_): _description_
-        cell2 (_type_): _description_
-        cell3 (_type_): _description_
-        cell4 (_type_): _description_
         align (str, optional): _description_. Defaults to "C".
+        page_width (int, optional): _description_. Defaults to 210.
+        margin (int, optional): _description_. Defaults to 10.
+        cell1_width (float, optional): _description_. Defaults to 0.5.
+        cell2_width (float, optional): _description_. Defaults to 0.5.
     """
-    pass
+    if cell1_width + cell2_width != 1:
+        raise ValueError(
+            f"Cell widths must add up to 1. Currently widths {cell1_width} and {cell2_width} add up to ", cell1_width + cell2_width)
+
+    page_width = page_width - (margin * 2)
+    cell1_width = page_width * cell1_width
+    cell2_width = page_width * cell2_width
+    y_position = pdf.y
+
+    pdf.set_xy(pdf.l_margin, y_position)
+    pdf.multi_cell(
+        w=cell1_width,
+        h=cell_height,
+        txt=cell1_text,
+        align=cell1_align,
+        border=border,
+        fill=cell1_fill
+    )
+
+    pdf.set_xy(pdf.l_margin + cell1_width, y_position)
+    pdf.multi_cell(
+        w=cell2_width,
+        h=cell_height,
+        txt=cell2_text,
+        align=cell2_align,
+        border=border,
+        ln=new_line,
+        fill=cell2_fill
+    )
+
+
+def add_three_cell_row(
+        pdf,
+        cell1_text,
+        cell2_text,
+        cell3_text,
+        cell1_align="C",
+        cell2_align="C",
+        cell3_align="C",
+        page_width=210,
+        margin=10,
+        border=1,
+        new_line=1,
+        cell1_fill=False,
+        cell2_fill=False,
+        cell3_fill=False,
+        cell_height=20,
+        cell1_width=(1/3),
+        cell2_width=(1/3),
+        cell3_width=(1/3)
+):
+    """_summary_
+
+    Args:
+        pdf (_type_): _description_
+        cell1_text (_type_): _description_
+        cell2_text (_type_): _description_
+        cell3_text (_type_): _description_
+        cell1_align (str, optional): _description_. Defaults to "C".
+        cell2_align (str, optional): _description_. Defaults to "C".
+        cell3_align (str, optional): _description_. Defaults to "C".
+        page_width (int, optional): _description_. Defaults to 210.
+        margin (int, optional): _description_. Defaults to 10.
+        border (int, optional): _description_. Defaults to 1.
+        new_line (int, optional): _description_. Defaults to 1.
+        cell1_fill (bool, optional): _description_. Defaults to False.
+        cell2_fill (bool, optional): _description_. Defaults to False.
+        cell3_fill (bool, optional): _description_. Defaults to False.
+        cell_height (int, optional): _description_. Defaults to 20.
+        cell1_width (tuple, optional): _description_. Defaults to (1/3).
+        cell2_width (tuple, optional): _description_. Defaults to (1/3).
+        cell3_width (tuple, optional): _description_. Defaults to (1/3).
+
+    Raises:
+        ValueError: _description_
+    """
+    if cell1_width + cell2_width + cell3_width != 1:
+        raise ValueError(
+            f"Cell widths must add up to 1. Currently widths {cell1_width}, {cell2_width}, and {cell3_width} add up to ", cell1_width + cell2_width + cell3_width)
+
+    page_width = page_width - (margin * 2)
+    cell1_width = page_width * cell1_width
+    cell2_width = page_width * cell2_width
+    cell3_width = page_width * cell3_width
+    y_position = pdf.y
+
+    pdf.set_xy(pdf.l_margin, y_position)
+    pdf.multi_cell(
+        w=cell1_width,
+        h=cell_height,
+        txt=cell1_text,
+        align=cell1_align,
+        border=border,
+        ln=0,
+        fill=cell1_fill
+    )
+
+    pdf.set_xy(pdf.l_margin + cell1_width, y_position)
+    pdf.multi_cell(
+        w=cell2_width,
+        h=cell_height,
+        txt=cell2_text,
+        align=cell2_align,
+        border=border,
+        ln=0,
+        fill=cell2_fill
+    )
+
+    pdf.set_xy(pdf.l_margin + cell1_width + cell2_width, y_position)
+    pdf.multi_cell(
+        w=cell3_width,
+        h=cell_height,
+        txt=cell3_text,
+        align=cell3_align,
+        border=border,
+        ln=new_line,
+        fill=cell3_fill
+    )
+
+
+def add_four_cell_row(
+        pdf,
+        cell1_text,
+        cell2_text,
+        cell3_text,
+        cell4_text,
+        cell1_align="C",
+        cell2_align="C",
+        cell3_align="C",
+        cell4_align="C",
+        page_width=210,
+        margin=10,
+        border=1,
+        new_line=1,
+        cell1_fill=False,
+        cell2_fill=False,
+        cell3_fill=False,
+        cell4_fill=False,
+        cell_height=20,
+        cell1_width=0.25,
+        cell2_width=0.25,
+        cell3_width=0.25,
+        cell4_width=0.25
+):
+    if cell1_width + cell2_width + cell3_width + cell4_width != 1:
+        raise ValueError(
+            f"Cell widths must add up to 1. Currently widths {cell1_width}, {cell2_width}, {cell3_width}, and {cell4_width} add up to ", cell1_width + cell2_width + cell3_width + cell4_width)
+
+    page_width = page_width - (margin * 2)
+    cell1_width = page_width * cell1_width
+    cell2_width = page_width * cell2_width
+    cell3_width = page_width * cell3_width
+    cell4_width = page_width * cell4_width
+    y_position = pdf.y
+
+    pdf.set_xy(pdf.l_margin, y_position)
+    pdf.multi_cell(
+        w=cell1_width,
+        h=cell_height,
+        txt=cell1_text,
+        align=cell1_align,
+        border=border,
+        ln=0,
+        fill=cell1_fill
+    )
+
+    pdf.set_xy(pdf.l_margin + cell1_width, y_position)
+    pdf.multi_cell(
+        w=cell2_width,
+        h=cell_height,
+        txt=cell2_text,
+        align=cell2_align,
+        border=border,
+        ln=0,
+        fill=cell2_fill
+    )
+
+    pdf.set_xy(pdf.l_margin + cell1_width + cell2_width, y_position)
+    pdf.multi_cell(
+        w=cell3_width,
+        h=cell_height,
+        txt=cell3_text,
+        align=cell3_align,
+        border=border,
+        ln=0,
+        fill=cell3_fill
+    )
+
+    pdf.set_xy(pdf.l_margin + cell1_width + cell2_width + cell3_width, y_position)
+    pdf.multi_cell(
+        w=cell4_width,
+        h=cell_height,
+        txt=cell4_text,
+        align=cell4_align,
+        border=border,
+        ln=new_line,
+        fill=cell4_fill
+    )
 
 
 def add_five_cell_row(pdf, cell1, cell2, cell3, cell4, cell5, align="C", page_width=210, margin=10):
