@@ -91,6 +91,20 @@ add_four_cell_row(
 )
 
 # Add 5 Cell Row - Align Left
+print("Adding 5 Cell Row - Align Center")
+add_five_cell_row(
+    new_pdf,
+    cell1_text="Add 5 Cell Row - Cell 1 - Align Left",
+    cell2_text="Add 5 Cell Row - Cell 2 - Align Left",
+    cell3_text="Add 5 Cell Row - Cell 3 - Align Left",
+    cell4_text="Add 5 Cell Row - Cell 4 - Align Left",
+    cell5_text="Add 5 Cell Row - Cell 5 - Align Left",
+    cell1_align="L",
+    cell2_align="L",
+    cell3_align="L",
+    cell4_align="L",
+    cell5_align="L"
+)
 
 # Add 1 Cell Row - Align Right
 print("Adding 1 Cell Row - Align Right")
@@ -134,6 +148,20 @@ add_four_cell_row(
 )
 
 # Add 5 Cell Row - Align Right
+print("Adding 5 Cell Row - Align Center")
+add_five_cell_row(
+    new_pdf,
+    cell1_text="Add 5 Cell Row - Cell 1 - Align Right",
+    cell2_text="Add 5 Cell Row - Cell 2 - Align Right",
+    cell3_text="Add 5 Cell Row - Cell 3 - Align Right",
+    cell4_text="Add 5 Cell Row - Cell 4 - Align Right",
+    cell5_text="Add 5 Cell Row - Cell 5 - Align Right",
+    cell1_align="R",
+    cell2_align="R",
+    cell3_align="R",
+    cell4_align="R",
+    cell5_align="R"
+)
 
 # Add Empty Row
 

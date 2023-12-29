@@ -1,8 +1,15 @@
 from fpdf import FPDF
 
 
-def create_pdf(font="Arial", font_size=8):
+def create_pdf(font="times", font_size=8):
     """_summary_
+
+    Args:
+        font (str, optional): Courier (fixed-width), Helvetica (sans serif), Times (serif), Symbol (symbolic) or ZapfDingbats (symbolic) . Defaults to "courier".
+        font_size (int, optional): _description_. Defaults to 8.
+
+    Returns:
+        _type_: _description_
     """
     pdf = FPDF(unit="in", format="legal")
     pdf.set_font(font, size=font_size)
@@ -327,7 +334,8 @@ def add_four_cell_row(
         fill=cell3_fill
     )
 
-    pdf.set_xy(pdf.l_margin + cell1_width + cell2_width + cell3_width, y_position)
+    pdf.set_xy(pdf.l_margin + cell1_width +
+               cell2_width + cell3_width, y_position)
     pdf.multi_cell(
         w=cell4_width,
         h=cell_height,
@@ -445,7 +453,8 @@ def add_five_cell_row(
         fill=cell3_fill
     )
 
-    pdf.set_xy(pdf.l_margin + cell1_width + cell2_width + cell3_width, y_position)
+    pdf.set_xy(pdf.l_margin + cell1_width +
+               cell2_width + cell3_width, y_position)
     pdf.multi_cell(
         w=cell4_width,
         h=cell_height,
@@ -456,7 +465,8 @@ def add_five_cell_row(
         fill=cell4_fill
     )
 
-    pdf.set_xy(pdf.l_margin + cell1_width + cell2_width + cell3_width + cell4_width, y_position)
+    pdf.set_xy(pdf.l_margin + cell1_width + cell2_width +
+               cell3_width + cell4_width, y_position)
     pdf.multi_cell(
         w=cell5_width,
         h=cell_height,
