@@ -1,3 +1,6 @@
+"""
+    FPDF helper functions for creating PDFs
+"""
 from fpdf import FPDF
 
 
@@ -5,7 +8,8 @@ def create_pdf(font="times", font_size=8):
     """_summary_
 
     Args:
-        font (str, optional): Courier (fixed-width), Helvetica (sans serif), Times (serif), Symbol (symbolic) or ZapfDingbats (symbolic) . Defaults to "courier".
+        font (str, optional): Courier (fixed-width), Helvetica (sans serif), 
+            Times (serif), Symbol (symbolic) or ZapfDingbats (symbolic) . Defaults to "courier".
         font_size (int, optional): _description_. Defaults to 8.
 
     Returns:
@@ -128,10 +132,13 @@ def add_two_cell_row(
     """
     if cell1_fill or cell2_fill:
         set_cell_fill_color(pdf, r, g, b)
-    
+
     if cell1_width + cell2_width != 1:
         raise ValueError(
-            f"Cell widths must add up to 1. Currently widths {cell1_width} and {cell2_width} add up to ", cell1_width + cell2_width)
+            f"Cell widths must add up to 1. "
+            f"Currently widths {cell1_width} and {cell2_width}"
+            f"add up to ", cell1_width + cell2_width
+            )
 
     page_width = page_width - (margin * 2)
     cell1_width = page_width * cell1_width
@@ -213,7 +220,10 @@ def add_three_cell_row(
 
     if cell1_width + cell2_width + cell3_width != 1:
         raise ValueError(
-            f"Cell widths must add up to 1. Currently widths {cell1_width}, {cell2_width}, and {cell3_width} add up to ", cell1_width + cell2_width + cell3_width)
+            f"Cell widths must add up to 1. "
+            f"Currently widths {cell1_width}, {cell2_width}, and {cell3_width} add up to ", 
+            cell1_width + cell2_width + cell3_width
+            )
 
     page_width = page_width - (margin * 2)
     cell1_width = page_width * cell1_width
@@ -316,7 +326,10 @@ def add_four_cell_row(
 
     if cell1_width + cell2_width + cell3_width + cell4_width != 1:
         raise ValueError(
-            f"Cell widths must add up to 1. Currently widths {cell1_width}, {cell2_width}, {cell3_width}, and {cell4_width} add up to ", cell1_width + cell2_width + cell3_width + cell4_width)
+            f"Cell widths must add up to 1. "
+            f"Currently widths {cell1_width}, {cell2_width}, {cell3_width}, and {cell4_width} "
+            f"add up to ", cell1_width + cell2_width + cell3_width + cell4_width
+            )
 
     page_width = page_width - (margin * 2)
     cell1_width = page_width * cell1_width
@@ -440,7 +453,11 @@ def add_five_cell_row(
 
     if cell1_width + cell2_width + cell3_width + cell4_width + cell5_width != 1:
         raise ValueError(
-            f"Cell widths must add up to 1. Currently widths {cell1_width}, {cell2_width}, {cell3_width}, {cell4_width} and {cell5_width} add up to ", cell1_width + cell2_width + cell3_width + cell4_width + cell5_width)
+            f"Cell widths must add up to 1. "
+            f"Currently widths {cell1_width}, {cell2_width}, {cell3_width}, {cell4_width} "
+            f"and {cell5_width} add up to ", 
+            cell1_width + cell2_width + cell3_width + cell4_width + cell5_width
+            )
 
     page_width = page_width - (margin * 2)
     cell1_width = page_width * cell1_width
