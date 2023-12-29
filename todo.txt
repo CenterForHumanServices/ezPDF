@@ -1,5 +1,3 @@
-- Create 5-column row
 - Select from table based on column? (Pandas?)
 - Select from table based on row? (Pandas?)
-- Allow height and newline attributes to be changed from default
 - Auto detect if we are reaching end of page and create new page if so
