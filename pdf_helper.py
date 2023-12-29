@@ -36,14 +36,14 @@ def set_font(pdf, font="Arial", font_size=8):
     pdf.set_font(font, size=font_size)
 
 
-def add_empty_line(pdf, height=20):
+def add_empty_row(pdf, height=0.5):
     """_summary_
 
     Args:
         pdf (_type_): _description_
         height (int): _description_
     """
-    pass
+    pdf.multi_cell(w=0, h=height, border=0, ln=1)
 
 
 def set_cell_fill_color(pdf, r, g, b):
@@ -55,7 +55,7 @@ def set_cell_fill_color(pdf, r, g, b):
         g (_type_): _description_
         b (_type_): _description_
     """
-    pass
+    pdf.set_fill_color(r, g, b)
 
 
 def add_one_cell_row(
@@ -67,7 +67,10 @@ def add_one_cell_row(
     border=1,
     new_line=1,
     fill=False,
-    cell_height=0.5
+    cell_height=0.5,
+    r=0,
+    g=0,
+    b=0
 ) -> None:
     """_summary_
 
@@ -76,6 +79,8 @@ def add_one_cell_row(
         text (_type_): _description_
         align (str): _description_
     """
+    if fill:
+        set_cell_fill_color(pdf, r, g, b)
     page_width = page_width - (margin * 2)
 
     pdf.set_xy(pdf.l_margin, pdf.y)
@@ -91,20 +96,24 @@ def add_one_cell_row(
 
 
 def add_two_cell_row(
-        pdf,
-        cell1_text,
-        cell2_text,
-        cell1_align="C",
-        cell2_align="C",
-        page_width=8.5,
-        margin=0.5,
-        border=1,
-        new_line=1,
-        cell1_fill=False,
-        cell2_fill=False,
-        cell_height=0.5,
-        cell1_width=0.5,
-        cell2_width=0.5):
+    pdf,
+    cell1_text,
+    cell2_text,
+    cell1_align="C",
+    cell2_align="C",
+    page_width=8.5,
+    margin=0.5,
+    border=1,
+    new_line=1,
+    cell1_fill=False,
+    cell2_fill=False,
+    cell_height=0.5,
+    cell1_width=0.5,
+    cell2_width=0.5,
+    r=0,
+    g=0,
+    b=0
+):
     """_summary_
 
     Args:
@@ -117,6 +126,9 @@ def add_two_cell_row(
         cell1_width (float, optional): _description_. Defaults to 0.5.
         cell2_width (float, optional): _description_. Defaults to 0.5.
     """
+    if cell1_fill or cell2_fill:
+        set_cell_fill_color(pdf, r, g, b)
+    
     if cell1_width + cell2_width != 1:
         raise ValueError(
             f"Cell widths must add up to 1. Currently widths {cell1_width} and {cell2_width} add up to ", cell1_width + cell2_width)
@@ -166,7 +178,10 @@ def add_three_cell_row(
         cell_height=0.5,
         cell1_width=(1/3),
         cell2_width=(1/3),
-        cell3_width=(1/3)
+        cell3_width=(1/3),
+        r=0,
+        g=0,
+        b=0
 ):
     """_summary_
 
@@ -193,6 +208,9 @@ def add_three_cell_row(
     Raises:
         ValueError: _description_
     """
+    if cell1_fill or cell2_fill or cell3_fill:
+        set_cell_fill_color(pdf, r, g, b)
+
     if cell1_width + cell2_width + cell3_width != 1:
         raise ValueError(
             f"Cell widths must add up to 1. Currently widths {cell1_width}, {cell2_width}, and {cell3_width} add up to ", cell1_width + cell2_width + cell3_width)
@@ -259,7 +277,10 @@ def add_four_cell_row(
         cell1_width=0.25,
         cell2_width=0.25,
         cell3_width=0.25,
-        cell4_width=0.25
+        cell4_width=0.25,
+        r=0,
+        g=0,
+        b=0
 ):
     """_summary_
 
@@ -290,6 +311,9 @@ def add_four_cell_row(
     Raises:
         ValueError: _description_
     """
+    if cell1_fill or cell2_fill or cell3_fill or cell4_fill:
+        set_cell_fill_color(pdf, r, g, b)
+
     if cell1_width + cell2_width + cell3_width + cell4_width != 1:
         raise ValueError(
             f"Cell widths must add up to 1. Currently widths {cell1_width}, {cell2_width}, {cell3_width}, and {cell4_width} add up to ", cell1_width + cell2_width + cell3_width + cell4_width)
@@ -373,7 +397,10 @@ def add_five_cell_row(
         cell2_width=0.2,
         cell3_width=0.2,
         cell4_width=0.2,
-        cell5_width=0.2
+        cell5_width=0.2,
+        r=0,
+        g=0,
+        b=0
 ):
     """_summary_
 
@@ -408,6 +435,9 @@ def add_five_cell_row(
     Raises:
         ValueError: _description_
     """
+    if cell1_fill or cell2_fill or cell3_fill or cell4_fill or cell5_fill:
+        set_cell_fill_color(pdf, r, g, b)
+
     if cell1_width + cell2_width + cell3_width + cell4_width + cell5_width != 1:
         raise ValueError(
             f"Cell widths must add up to 1. Currently widths {cell1_width}, {cell2_width}, {cell3_width}, {cell4_width} and {cell5_width} add up to ", cell1_width + cell2_width + cell3_width + cell4_width + cell5_width)

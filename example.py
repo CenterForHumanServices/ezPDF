@@ -164,9 +164,40 @@ add_five_cell_row(
 )
 
 # Add Empty Row
+print("Adding empty row")
+add_empty_row(new_pdf)
+
+# Creating row without border
+print("Creating row without border")
+add_one_cell_row(new_pdf, "Creating row without border", border=0)
+
+# Create row without border and with fill
+print("Creating row without border and with fill")
+add_one_cell_row(
+    new_pdf,
+    "Creating row without border and with fill",
+    border=0,
+    fill=1,
+    r=195,
+    g=223,
+    b=236)
+
+# Create 3 row with border, and first cell is filled
+print("Creating 3 row with border, and first cell is filled")
+add_three_cell_row(
+    new_pdf,
+    cell1_text="Creating 3 row with border, and first cell is filled",
+    cell2_text="Creating 3 row with border, and first cell is filled",
+    cell3_text="Creating 3 row with border, and first cell is filled",
+    cell1_fill=1,
+    r=195,
+    g=223,
+    b=236,
+)
 
 # Attempt to overfill page
-for i in range(10):
+print("Attempting to overfill page by adding 10 rows")
+for i in range(1, 11):
     add_one_cell_row(new_pdf, f"Add 1 Cell Row - Align Center - Row {i}")
 
 # Change Fill Color
