@@ -4,19 +4,19 @@ from fpdf import FPDF
 def create_pdf(font="Arial", font_size=8):
     """_summary_
     """
-    pdf = FPDF()
+    pdf = FPDF(unit="in", format="legal")
     pdf.set_font(font, size=font_size)
 
     return pdf
 
 
-def add_page(pdf):
+def add_page(pdf, page_format="legal"):
     """_summary_
 
     Args:
         pdf (_type_): _description_
     """
-    pdf.add_page()
+    pdf.add_page(format=page_format)
 
 
 def set_font(pdf, font="Arial", font_size=8):
@@ -55,12 +55,12 @@ def add_one_cell_row(
     pdf,
     text,
     align="C",
-    page_width=210,
-    margin=10,
+    page_width=8.5,
+    margin=0.5,
     border=1,
     new_line=1,
     fill=False,
-    cell_height=20
+    cell_height=0.5
 ) -> None:
     """_summary_
 
@@ -89,13 +89,13 @@ def add_two_cell_row(
         cell2_text,
         cell1_align="C",
         cell2_align="C",
-        page_width=210,
-        margin=10,
+        page_width=8.5,
+        margin=0.5,
         border=1,
         new_line=1,
         cell1_fill=False,
         cell2_fill=False,
-        cell_height=20,
+        cell_height=0.5,
         cell1_width=0.5,
         cell2_width=0.5):
     """_summary_
@@ -149,14 +149,14 @@ def add_three_cell_row(
         cell1_align="C",
         cell2_align="C",
         cell3_align="C",
-        page_width=210,
-        margin=10,
+        page_width=8.5,
+        margin=0.5,
         border=1,
         new_line=1,
         cell1_fill=False,
         cell2_fill=False,
         cell3_fill=False,
-        cell_height=20,
+        cell_height=0.5,
         cell1_width=(1/3),
         cell2_width=(1/3),
         cell3_width=(1/3)
@@ -240,15 +240,15 @@ def add_four_cell_row(
         cell2_align="C",
         cell3_align="C",
         cell4_align="C",
-        page_width=210,
-        margin=10,
+        page_width=8.5,
+        margin=0.5,
         border=1,
         new_line=1,
         cell1_fill=False,
         cell2_fill=False,
         cell3_fill=False,
         cell4_fill=False,
-        cell_height=20,
+        cell_height=0.5,
         cell1_width=0.25,
         cell2_width=0.25,
         cell3_width=0.25,
@@ -351,8 +351,8 @@ def add_five_cell_row(
         cell3_align="C",
         cell4_align="C",
         cell5_align="C",
-        page_width=210,
-        margin=10,
+        page_width=8.5,
+        margin=0.5,
         border=1,
         new_line=1,
         cell1_fill=False,
@@ -360,7 +360,7 @@ def add_five_cell_row(
         cell3_fill=False,
         cell4_fill=False,
         cell5_fill=False,
-        cell_height=20,
+        cell_height=0.5,
         cell1_width=0.2,
         cell2_width=0.2,
         cell3_width=0.2,
