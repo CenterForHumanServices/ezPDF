@@ -1,10 +1,13 @@
 """
     FPDF helper functions for creating PDFs
 """
+from typing import Union
 from fpdf import FPDF
 
-
-def create_pdf(font="times", font_size=8):
+def create_pdf(
+    font: str = "times",
+    font_size: int = 8
+) -> FPDF:
     """_summary_
 
     Args:
@@ -21,7 +24,10 @@ def create_pdf(font="times", font_size=8):
     return pdf
 
 
-def add_page(pdf, page_format="legal"):
+def add_page(
+    pdf: FPDF,
+    page_format : str ="legal"
+) -> None:
     """_summary_
 
     Args:
@@ -30,7 +36,11 @@ def add_page(pdf, page_format="legal"):
     pdf.add_page(format=page_format)
 
 
-def set_font(pdf, font="Arial", font_size=8):
+def set_font(
+    pdf: FPDF,
+    font : str = "Arial",
+    font_size: int = 8
+) -> None:
     """_summary_
 
     Args:
@@ -40,7 +50,10 @@ def set_font(pdf, font="Arial", font_size=8):
     pdf.set_font(font, size=font_size)
 
 
-def add_empty_row(pdf, height=0.5):
+def add_empty_row(
+    pdf: FPDF,
+    height: float = 0.5
+) -> None:
     """_summary_
 
     Args:
@@ -50,7 +63,12 @@ def add_empty_row(pdf, height=0.5):
     pdf.multi_cell(w=0, h=height, border=0, ln=1)
 
 
-def set_cell_fill_color(pdf, r, g, b):
+def set_cell_fill_color(
+    pdf: FPDF,
+    r: int,
+    g: int,
+    b: int
+) -> None:
     """_summary_
 
     Args:
@@ -63,29 +81,39 @@ def set_cell_fill_color(pdf, r, g, b):
 
 
 def add_one_cell_row(
-    pdf,
-    text,
-    align="C",
-    page_width=8.5,
-    margin=0.5,
-    border=1,
-    new_line=1,
-    fill=False,
-    cell_height=0.5,
-    r=0,
-    g=0,
-    b=0
+    pdf: FPDF,
+    text: str,
+    align: str = "C",
+    page_width: float = 8.5,
+    margin: float = 0.5,
+    border: Union[int, str] = 1,
+    new_line: int = 1,
+    fill: bool = False,
+    cell_height: float = 0.5,
+    r: int = 0,
+    g: int = 0,
+    b: int = 0
 ) -> None:
     """_summary_
 
     Args:
-        pdf (_type_): _description_
-        text (_type_): _description_
-        align (str): _description_
+        pdf (FPDF): _description_
+        text (str): _description_
+        align (str, optional): _description_. Defaults to "C".
+        page_width (float, optional): _description_. Defaults to 8.5.
+        margin (float, optional): _description_. Defaults to 0.5.
+        border (Union[int, str], optional): Can be 0, 1, or string 
+            containing LRTB (Left, Right, Top, Bottom) in any order. Defaults to 1.
+        new_line (int, optional): _description_. Defaults to 1.
+        fill (bool, optional): _description_. Defaults to False.
+        cell_height (float, optional): _description_. Defaults to 0.5.
+        r (int, optional): _description_. Defaults to 0.
+        g (int, optional): _description_. Defaults to 0.
+        b (int, optional): _description_. Defaults to 0.
     """
     if fill:
         set_cell_fill_color(pdf, r, g, b)
-    page_width = page_width - (margin * 2)
+    page_width: float = page_width - (margin * 2)
 
     pdf.set_xy(pdf.l_margin, pdf.y)
     pdf.cell(
@@ -100,24 +128,24 @@ def add_one_cell_row(
 
 
 def add_two_cell_row(
-    pdf,
-    cell1_text,
-    cell2_text,
-    cell1_align="C",
-    cell2_align="C",
-    page_width=8.5,
-    margin=0.5,
-    border=1,
-    new_line=1,
-    cell1_fill=False,
-    cell2_fill=False,
-    cell_height=0.5,
-    cell1_width=0.5,
-    cell2_width=0.5,
-    r=0,
-    g=0,
-    b=0
-):
+    pdf: FPDF,
+    cell1_text: str,
+    cell2_text: str,
+    cell1_align: str = "C",
+    cell2_align: str = "C",
+    page_width: float = 8.5,
+    margin: float = 0.5,
+    border: Union[int, str] = 1,
+    new_line: int = 1,
+    cell1_fill: bool = False,
+    cell2_fill: bool = False,
+    cell_height: float = 0.5,
+    cell1_width: float = 0.5,
+    cell2_width: float = 0.5,
+    r: int = 0,
+    g: int = 0,
+    b: int = 0
+) -> None:
     """_summary_
 
     Args:
@@ -140,10 +168,10 @@ def add_two_cell_row(
             f"add up to ", cell1_width + cell2_width
             )
 
-    page_width = page_width - (margin * 2)
-    cell1_width = page_width * cell1_width
-    cell2_width = page_width * cell2_width
-    y_position = pdf.y
+    page_width: float = page_width - (margin * 2)
+    cell1_width: float = page_width * cell1_width
+    cell2_width: float = page_width * cell2_width
+    y_position: float = pdf.y
 
     pdf.set_xy(pdf.l_margin, y_position)
     pdf.multi_cell(
@@ -168,28 +196,28 @@ def add_two_cell_row(
 
 
 def add_three_cell_row(
-        pdf,
-        cell1_text,
-        cell2_text,
-        cell3_text,
-        cell1_align="C",
-        cell2_align="C",
-        cell3_align="C",
-        page_width=8.5,
-        margin=0.5,
-        border=1,
-        new_line=1,
-        cell1_fill=False,
-        cell2_fill=False,
-        cell3_fill=False,
-        cell_height=0.5,
-        cell1_width=(1/3),
-        cell2_width=(1/3),
-        cell3_width=(1/3),
-        r=0,
-        g=0,
-        b=0
-):
+        pdf: FPDF,
+        cell1_text: str,
+        cell2_text: str,
+        cell3_text: str,
+        cell1_align: str = "C",
+        cell2_align: str = "C",
+        cell3_align: str = "C",
+        page_width: float = 8.5,
+        margin: float = 0.5,
+        border: Union[int, str] = 1,
+        new_line: int = 1,
+        cell1_fill: bool = False,
+        cell2_fill: bool = False,
+        cell3_fill: bool = False,
+        cell_height: float = 0.5,
+        cell1_width: float = (1/3),
+        cell2_width: float = (1/3),
+        cell3_width: float= (1/3),
+        r: int = 0,
+        g: int = 0,
+        b: int = 0
+) -> None:
     """_summary_
 
     Args:
@@ -225,11 +253,11 @@ def add_three_cell_row(
             cell1_width + cell2_width + cell3_width
             )
 
-    page_width = page_width - (margin * 2)
-    cell1_width = page_width * cell1_width
-    cell2_width = page_width * cell2_width
-    cell3_width = page_width * cell3_width
-    y_position = pdf.y
+    page_width: float = page_width - (margin * 2)
+    cell1_width: float = page_width * cell1_width
+    cell2_width: float = page_width * cell2_width
+    cell3_width: float = page_width * cell3_width
+    y_position: float = pdf.y
 
     pdf.set_xy(pdf.l_margin, y_position)
     pdf.multi_cell(
@@ -266,32 +294,32 @@ def add_three_cell_row(
 
 
 def add_four_cell_row(
-        pdf,
-        cell1_text,
-        cell2_text,
-        cell3_text,
-        cell4_text,
-        cell1_align="C",
-        cell2_align="C",
-        cell3_align="C",
-        cell4_align="C",
-        page_width=8.5,
-        margin=0.5,
-        border=1,
-        new_line=1,
-        cell1_fill=False,
-        cell2_fill=False,
-        cell3_fill=False,
-        cell4_fill=False,
-        cell_height=0.5,
-        cell1_width=0.25,
-        cell2_width=0.25,
-        cell3_width=0.25,
-        cell4_width=0.25,
-        r=0,
-        g=0,
-        b=0
-):
+        pdf: FPDF,
+        cell1_text: str,
+        cell2_text: str,
+        cell3_text: str,
+        cell4_text: str,
+        cell1_align: str = "C",
+        cell2_align: str = "C",
+        cell3_align: str = "C",
+        cell4_align: str = "C",
+        page_width: float = 8.5,
+        margin: float = 0.5,
+        border: Union[int, str] = 1,
+        new_line: int = 1,
+        cell1_fill: bool = False,
+        cell2_fill: bool = False,
+        cell3_fill: bool = False,
+        cell4_fill: bool = False,
+        cell_height: float = 0.5,
+        cell1_width: float = 0.25,
+        cell2_width: float = 0.25,
+        cell3_width: float = 0.25,
+        cell4_width: float = 0.25,
+        r: int = 0,
+        g: int = 0,
+        b: int = 0
+) -> None:
     """_summary_
 
     Args:
@@ -331,12 +359,12 @@ def add_four_cell_row(
             f"add up to ", cell1_width + cell2_width + cell3_width + cell4_width
             )
 
-    page_width = page_width - (margin * 2)
-    cell1_width = page_width * cell1_width
-    cell2_width = page_width * cell2_width
-    cell3_width = page_width * cell3_width
-    cell4_width = page_width * cell4_width
-    y_position = pdf.y
+    page_width: float = page_width - (margin * 2)
+    cell1_width: float = page_width * cell1_width
+    cell2_width: float = page_width * cell2_width
+    cell3_width: float = page_width * cell3_width
+    cell4_width: float = page_width * cell4_width
+    y_position: float = pdf.y
 
     pdf.set_xy(pdf.l_margin, y_position)
     pdf.multi_cell(
@@ -385,36 +413,36 @@ def add_four_cell_row(
 
 
 def add_five_cell_row(
-        pdf,
-        cell1_text,
-        cell2_text,
-        cell3_text,
-        cell4_text,
-        cell5_text,
-        cell1_align="C",
-        cell2_align="C",
-        cell3_align="C",
-        cell4_align="C",
-        cell5_align="C",
-        page_width=8.5,
-        margin=0.5,
-        border=1,
-        new_line=1,
-        cell1_fill=False,
-        cell2_fill=False,
-        cell3_fill=False,
-        cell4_fill=False,
-        cell5_fill=False,
-        cell_height=0.5,
-        cell1_width=0.2,
-        cell2_width=0.2,
-        cell3_width=0.2,
-        cell4_width=0.2,
-        cell5_width=0.2,
-        r=0,
-        g=0,
-        b=0
-):
+        pdf: FPDF,
+        cell1_text: str,
+        cell2_text: str,
+        cell3_text: str,
+        cell4_text: str,
+        cell5_text: str,
+        cell1_align: str = "C",
+        cell2_align: str = "C",
+        cell3_align: str = "C",
+        cell4_align: str = "C",
+        cell5_align: str = "C",
+        page_width: float = 8.5,
+        margin: float = 0.5,
+        border: Union[int, str] = 1,
+        new_line: int = 1,
+        cell1_fill: bool = False,
+        cell2_fill: bool = False,
+        cell3_fill: bool = False,
+        cell4_fill: bool = False,
+        cell5_fill: bool = False,
+        cell_height: float = 0.5,
+        cell1_width: float = 0.2,
+        cell2_width: float = 0.2,
+        cell3_width: float = 0.2,
+        cell4_width: float = 0.2,
+        cell5_width: float = 0.2,
+        r: int = 0,
+        g: int = 0,
+        b: int = 0
+) -> None:
     """_summary_
 
     Args:
@@ -459,13 +487,13 @@ def add_five_cell_row(
             cell1_width + cell2_width + cell3_width + cell4_width + cell5_width
             )
 
-    page_width = page_width - (margin * 2)
-    cell1_width = page_width * cell1_width
-    cell2_width = page_width * cell2_width
-    cell3_width = page_width * cell3_width
-    cell4_width = page_width * cell4_width
-    cell5_width = page_width * cell5_width
-    y_position = pdf.y
+    page_width: float = page_width - (margin * 2)
+    cell1_width: float = page_width * cell1_width
+    cell2_width: float = page_width * cell2_width
+    cell3_width: float = page_width * cell3_width
+    cell4_width: float = page_width * cell4_width
+    cell5_width: float = page_width * cell5_width
+    y_position: float = pdf.y
 
     pdf.set_xy(pdf.l_margin, y_position)
     pdf.multi_cell(
@@ -525,7 +553,10 @@ def add_five_cell_row(
     )
 
 
-def export_pdf(pdf, filename):
+def export_pdf(
+    pdf: FPDF,
+    filename: str
+) -> None:
     """_summary_
 
     Args:
