@@ -1,42 +1,30 @@
 """
-    Testing the abstraction layer to create PDFs
+    Example of how to use ez_pdf
 """
-from pdf_helper import (
-    create_pdf,
-    add_page,
-    add_one_cell_row,
-    add_two_cell_row,
-    add_three_cell_row,
-    add_four_cell_row,
-    add_five_cell_row,
-    add_empty_row,
-    export_pdf,
-)
+from ez_pdf.ez_pdf import EzPDF
 
 # Create New PDF
 print("Creating New PDF")
-new_pdf = create_pdf()
+pdf = EzPDF()
 
 # Add Page
 print("Adding Page")
-add_page(new_pdf)
+pdf.add_page()
 
 # Add 1 Cell Row - Align Center
 print("Adding 1 Cell Row - Align Center")
-add_one_cell_row(new_pdf, "Add 1 Cell Row - Align Center")
+pdf.add_one_cell_row("Add 1 Cell Row - Align Center")
 
 # Add 2 Cell Row - Align Center
 print("Adding 2 Cell Row - Align Center")
-add_two_cell_row(
-    new_pdf,
+pdf.add_two_cell_row(
     cell1_text="Add 2 Cell Row - Cell 1 - Align Center",
     cell2_text="Add 2 Cell Row - Cell 2 - Align Center",
 )
 
 # Add 3 Cell Row - Align Center
 print("Adding 3 Cell Row - Align Center")
-add_three_cell_row(
-    new_pdf,
+pdf.add_three_cell_row(
     cell1_text="Add 3 Cell Row - Cell 1 - Align Center",
     cell2_text="Add 3 Cell Row - Cell 2 - Align Center",
     cell3_text="Add 3 Cell Row - Cell 3 - Align Center",
@@ -44,8 +32,7 @@ add_three_cell_row(
 
 # Add 4 Cell Row - Align Center
 print("Adding 4 Cell Row - Align Center")
-add_four_cell_row(
-    new_pdf,
+pdf.add_four_cell_row(
     cell1_text="Add 4 Cell Row - Cell 1 - Align Center",
     cell2_text="Add 4 Cell Row - Cell 2 - Align Center",
     cell3_text="Add 4 Cell Row - Cell 3 - Align Center",
@@ -54,8 +41,7 @@ add_four_cell_row(
 
 # Add 5 Cell Row - Align Center
 print("Adding 5 Cell Row - Align Center")
-add_five_cell_row(
-    new_pdf,
+pdf.add_five_cell_row(
     cell1_text="Add 5 Cell Row - Cell 1 - Align Center",
     cell2_text="Add 5 Cell Row - Cell 2 - Align Center",
     cell3_text="Add 5 Cell Row - Cell 3 - Align Center",
@@ -65,12 +51,11 @@ add_five_cell_row(
 
 # Add 1 Cell Row - Align Left
 print("Adding 1 Cell Row - Align Left")
-add_one_cell_row(new_pdf, "Add 1 Cell Row - Align Left", align="L")
+pdf.add_one_cell_row("Add 1 Cell Row - Align Left", align="L")
 
 # Add 2 Cell Row - Align Left
 print("Adding 2 Cell Row - Align Left")
-add_two_cell_row(
-    new_pdf,
+pdf.add_two_cell_row(
     cell1_text="Add 2 Cell Row - Cell 1 - Align Left",
     cell2_text="Add 2 Cell Row - Cell 2 - Align Left",
     cell1_align="L",
@@ -79,8 +64,7 @@ add_two_cell_row(
 
 # Add 3 Cell Row - Align Left
 print("Adding 3 Cell Row - Align Left")
-add_three_cell_row(
-    new_pdf,
+pdf.add_three_cell_row(
     cell1_text="Add 3 Cell Row - Cell 1 - Align Left",
     cell2_text="Add 3 Cell Row - Cell 2 - Align Left",
     cell3_text="Add 3 Cell Row - Cell 3 - Align Left",
@@ -91,8 +75,7 @@ add_three_cell_row(
 
 # Add 4 Cell Row - Align Left
 print("Adding 4 Cell Row - Align Left")
-add_four_cell_row(
-    new_pdf,
+pdf.add_four_cell_row(
     cell1_text="Add 4 Cell Row - Cell 1 - Align Left",
     cell2_text="Add 4 Cell Row - Cell 2 - Align Left",
     cell3_text="Add 4 Cell Row - Cell 3 - Align Left",
@@ -105,8 +88,7 @@ add_four_cell_row(
 
 # Add 5 Cell Row - Align Left
 print("Adding 5 Cell Row - Align Center")
-add_five_cell_row(
-    new_pdf,
+pdf.add_five_cell_row(
     cell1_text="Add 5 Cell Row - Cell 1 - Align Left",
     cell2_text="Add 5 Cell Row - Cell 2 - Align Left",
     cell3_text="Add 5 Cell Row - Cell 3 - Align Left",
@@ -121,13 +103,12 @@ add_five_cell_row(
 
 # Add 1 Cell Row - Align Right
 print("Adding 1 Cell Row - Align Right")
-add_one_cell_row(new_pdf, "Add 1 Cell Row - Align Right", align="R")
+pdf.add_one_cell_row("Add 1 Cell Row - Align Right", align="R")
 
 
 # Add 2 Cell Row - Align Right
 print("Adding 2 Cell Row - Align Right")
-add_two_cell_row(
-    new_pdf,
+pdf.add_two_cell_row(
     cell1_text="Add 2 Cell Row - Cell 1 - Align Right",
     cell2_text="Add 2 Cell Row - Cell 2 - Align Right",
     cell1_align="R",
@@ -136,8 +117,7 @@ add_two_cell_row(
 
 # Add 3 Cell Row - Align Right
 print("Adding 3 Cell Row - Align Right")
-add_three_cell_row(
-    new_pdf,
+pdf.add_three_cell_row(
     cell1_text="Add 3 Cell Row - Cell 1 - Align Right",
     cell2_text="Add 3 Cell Row - Cell 2 - Align Right",
     cell3_text="Add 3 Cell Row - Cell 3 - Align Right",
@@ -148,8 +128,7 @@ add_three_cell_row(
 
 # Add 4 Cell Row - Align Right
 print("Adding 4 Cell Row - Align Right")
-add_four_cell_row(
-    new_pdf,
+pdf.add_four_cell_row(
     cell1_text="Add 4 Cell Row - Cell 1 - Align Right",
     cell2_text="Add 4 Cell Row - Cell 2 - Align Right",
     cell3_text="Add 4 Cell Row - Cell 3 - Align Right",
@@ -162,8 +141,7 @@ add_four_cell_row(
 
 # Add 5 Cell Row - Align Right
 print("Adding 5 Cell Row - Align Center")
-add_five_cell_row(
-    new_pdf,
+pdf.add_five_cell_row(
     cell1_text="Add 5 Cell Row - Cell 1 - Align Right",
     cell2_text="Add 5 Cell Row - Cell 2 - Align Right",
     cell3_text="Add 5 Cell Row - Cell 3 - Align Right",
@@ -178,16 +156,15 @@ add_five_cell_row(
 
 # Add Empty Row
 print("Adding empty row")
-add_empty_row(new_pdf)
+pdf.add_empty_row()
 
 # Creating row without border
 print("Creating row without border")
-add_one_cell_row(new_pdf, "Creating row without border", border=0)
+pdf.add_one_cell_row("Creating row without border", border=0)
 
 # Create row without border and with fill
 print("Creating row without border and with fill")
-add_one_cell_row(
-    new_pdf,
+pdf.add_one_cell_row(
     "Creating row without border and with fill",
     border=0,
     fill=1,
@@ -197,8 +174,7 @@ add_one_cell_row(
 
 # Create 3 row with border, and first cell is filled
 print("Creating 3 row with border, and first cell is filled")
-add_three_cell_row(
-    new_pdf,
+pdf.add_three_cell_row(
     cell1_text="Creating 3 row with border, and first cell is filled",
     cell2_text="Creating 3 row with border, and first cell is filled",
     cell3_text="Creating 3 row with border, and first cell is filled",
@@ -211,7 +187,7 @@ add_three_cell_row(
 # Attempt to overfill page
 print("Attempting to overfill page by adding 10 rows")
 for i in range(1, 11):
-    add_one_cell_row(new_pdf, f"Add 1 Cell Row - Align Center - Row {i}")
+    pdf.add_one_cell_row(f"Add 1 Cell Row - Align Center - Row {i}")
 
 # Change Fill Color
 
@@ -219,22 +195,20 @@ for i in range(1, 11):
 
 # Added 2 new pages
 print("Adding new page")
-add_page(new_pdf)
+pdf.add_page()
 
 print("Adding 3 Cell Row - Align Center")
-add_three_cell_row(
-    new_pdf,
+pdf.add_three_cell_row(
     cell1_text="Add 3 Cell Row - Cell 1 - Align Center",
     cell2_text="Add 3 Cell Row - Cell 2 - Align Center",
     cell3_text="Add 3 Cell Row - Cell 3 - Align Center",
 )
 
 print("Adding new page")
-add_page(new_pdf)
+pdf.add_page()
 
 print("Adding 3 Cell Row - Align Center")
-add_three_cell_row(
-    new_pdf,
+pdf.add_three_cell_row(
     cell1_text="Add 3 Cell Row - Cell 1 - Align Center",
     cell2_text="Add 3 Cell Row - Cell 2 - Align Center",
     cell3_text="Add 3 Cell Row - Cell 3 - Align Center",
@@ -242,4 +216,4 @@ add_three_cell_row(
 
 # Export PDF
 print("Exporting PDF")
-export_pdf(new_pdf, "example.pdf")
+pdf.export("ez_pdf.pdf")
