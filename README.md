@@ -1,6 +1,7 @@
+# ezPDF  
+Made by Carlos E. Ortega  
 
-
-Tested on Python 3.9, 3.10, 3.11, and 3.12
+Tested on Python 3.9, 3.10, 3.11, and 3.12  
 
 
 # More Documentation  
