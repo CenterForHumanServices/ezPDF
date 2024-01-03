@@ -216,4 +216,4 @@ pdf.add_three_cell_row(
 
 # Export PDF
 print("Exporting PDF")
-pdf.export("ez_pdf.pdf")
+pdf.export("example.pdf")
