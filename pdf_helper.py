@@ -8,15 +8,15 @@ def create_pdf(
     font: str = "times",
     font_size: int = 8
 ) -> FPDF:
-    """_summary_
+    """Creates the PDF object.
 
     Args:
         font (str, optional): Courier (fixed-width), Helvetica (sans serif), 
-            Times (serif), Symbol (symbolic) or ZapfDingbats (symbolic) . Defaults to "courier".
-        font_size (int, optional): _description_. Defaults to 8.
+            Times (serif), Symbol (symbolic) or ZapfDingbats (symbolic) . Defaults to "times".
+        font_size (int, optional): Font size. Defaults to 8.
 
     Returns:
-        _type_: _description_
+        FPDF: PDF object
     """
     pdf = FPDF(unit="in", format="legal")
     pdf.set_font(font, size=font_size)
@@ -28,24 +28,28 @@ def add_page(
     pdf: FPDF,
     page_format : str ="legal"
 ) -> None:
-    """_summary_
+    """Adds a page to the PDF object.
 
     Args:
-        pdf (_type_): _description_
+        pdf (FPDF): PDF object to add page to.
+        page_format (str, optional): 2-tuple or one of 'a3', 'a4', 'a5', 
+            'letter', or 'legal'. Defaults to "legal".
     """
     pdf.add_page(format=page_format)
 
 
 def set_font(
     pdf: FPDF,
-    font : str = "Arial",
+    font : str = "times",
     font_size: int = 8
 ) -> None:
-    """_summary_
+    """Sets the font for the PDF object.
 
     Args:
-        font (str, optional): _description_. Defaults to "Arial".
-        font_size (int, optional): _description_. Defaults to 8.
+        pdf (FPDF): PDF object to set font for.
+        font (str, optional): Courier (fixed-width), Helvetica (sans serif), 
+            Times (serif), Symbol (symbolic) or ZapfDingbats (symbolic) . Defaults to "times".
+        font_size (int, optional): Font size. Defaults to 8.
     """
     pdf.set_font(font, size=font_size)
 
@@ -54,11 +58,12 @@ def add_empty_row(
     pdf: FPDF,
     height: float = 0.5
 ) -> None:
-    """_summary_
+    """Adds empty cell to PDF object.
 
     Args:
-        pdf (_type_): _description_
-        height (int): _description_
+        pdf (FPDF): PDF object to add empty row to.
+        height (float, optional): Height of empty cell. 
+            Uses whatever format PDF uses, by default in inches. Defaults to 0.5.
     """
     pdf.multi_cell(w=0, h=height, border=0, ln=1)
 
@@ -69,13 +74,13 @@ def set_cell_fill_color(
     g: int,
     b: int
 ) -> None:
-    """_summary_
+    """Sets fill color for PDF object.
 
     Args:
-        pdf (_type_): _description_
-        r (_type_): _description_
-        g (_type_): _description_
-        b (_type_): _description_
+        pdf (FPDF): PDF object to set fill color for.
+        r (int): Red value (0-255)
+        g (int): Green value (0-255)
+        b (int): Blue value (0-255)
     """
     pdf.set_fill_color(r, g, b)
 
@@ -94,22 +99,32 @@ def add_one_cell_row(
     g: int = 0,
     b: int = 0
 ) -> None:
-    """_summary_
+    """Add one cell row.
 
     Args:
-        pdf (FPDF): _description_
-        text (str): _description_
-        align (str, optional): _description_. Defaults to "C".
-        page_width (float, optional): _description_. Defaults to 8.5.
-        margin (float, optional): _description_. Defaults to 0.5.
+        pdf (FPDF): PDF object to add row to.
+        text (str): Text to add to cell.
+        align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        page_width (float, optional): Width of page in given 
+            format (default inches). Defaults to 8.5.
+        margin (float, optional): Margin of page in given format (default inches). Defaults to 0.5.
         border (Union[int, str], optional): Can be 0, 1, or string 
             containing LRTB (Left, Right, Top, Bottom) in any order. Defaults to 1.
-        new_line (int, optional): _description_. Defaults to 1.
-        fill (bool, optional): _description_. Defaults to False.
-        cell_height (float, optional): _description_. Defaults to 0.5.
-        r (int, optional): _description_. Defaults to 0.
-        g (int, optional): _description_. Defaults to 0.
-        b (int, optional): _description_. Defaults to 0.
+        new_line (int, optional): Indicates if you want the final cell to require 
+            subsequent cell to a new line. Options are 0 (no new line) 
+            and 1 (new line). Defaults to 1.
+        fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell_height (float, optional): Height of cell. 
+            Uses whatever format PDF uses, by default in inches. Defaults to 0.5.
+        r (int, optional): Color code for red (0-255). Defaults to 0.
+        g (int, optional): Color code for green (0-255). Defaults to 0.
+        b (int, optional): Color code for blue (0-255). Defaults to 0.
     """
     if fill:
         set_cell_fill_color(pdf, r, g, b)
@@ -146,17 +161,48 @@ def add_two_cell_row(
     g: int = 0,
     b: int = 0
 ) -> None:
-    """_summary_
+    """Add two cell row.
 
     Args:
-        pdf (_type_): _description_
-        cell1 (_type_): _description_
-        cell2 (_type_): _description_
-        align (str, optional): _description_. Defaults to "C".
-        page_width (int, optional): _description_. Defaults to 210.
-        margin (int, optional): _description_. Defaults to 10.
-        cell1_width (float, optional): _description_. Defaults to 0.5.
-        cell2_width (float, optional): _description_. Defaults to 0.5.
+        pdf (FPDF): PDF object to add row to.
+        cell1_text (str): Text to add to cell.
+        cell2_text (str): Text to add to cell.
+        cell1_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        cell2_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        page_width (float, optional): Width of page in given format (default inches). 
+            Defaults to 8.5.
+        margin (float, optional): Margin of page in given format (default inches). Defaults to 0.5.
+        border (Union[int, str], optional): Can be 0, 1, or string 
+            containing LRTB (Left, Right, Top, Bottom) in any order. Defaults to 1.
+        new_line (int, optional): Indicates if you want the final cell to require 
+            subsequent cell to a new line. Options are 0 (no new line) and 
+            1 (new line). Defaults to 1.
+        cell1_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell2_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell_height (float, optional):Height of cell. 
+            Uses whatever format PDF uses, by default in inches. Defaults to 0.5.
+        cell1_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.5.
+        cell2_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.5.
+        r (int, optional): Color code for red (0-255). Defaults to 0.
+        g (int, optional): Color code for green (0-255). Defaults to 0.
+        b (int, optional): Color code for blue (0-255). Defaults to 0.
+
+    Raises:
+        ValueError: Given width percentages must add up to 1.
     """
     if cell1_fill or cell2_fill:
         set_cell_fill_color(pdf, r, g, b)
@@ -218,30 +264,59 @@ def add_three_cell_row(
         g: int = 0,
         b: int = 0
 ) -> None:
-    """_summary_
+    """Add three cell row.
 
     Args:
-        pdf (_type_): _description_
-        cell1_text (_type_): _description_
-        cell2_text (_type_): _description_
-        cell3_text (_type_): _description_
-        cell1_align (str, optional): _description_. Defaults to "C".
-        cell2_align (str, optional): _description_. Defaults to "C".
-        cell3_align (str, optional): _description_. Defaults to "C".
-        page_width (int, optional): _description_. Defaults to 210.
-        margin (int, optional): _description_. Defaults to 10.
-        border (int, optional): _description_. Defaults to 1.
-        new_line (int, optional): _description_. Defaults to 1.
-        cell1_fill (bool, optional): _description_. Defaults to False.
-        cell2_fill (bool, optional): _description_. Defaults to False.
-        cell3_fill (bool, optional): _description_. Defaults to False.
-        cell_height (int, optional): _description_. Defaults to 20.
-        cell1_width (tuple, optional): _description_. Defaults to (1/3).
-        cell2_width (tuple, optional): _description_. Defaults to (1/3).
-        cell3_width (tuple, optional): _description_. Defaults to (1/3).
+        pdf (FPDF): PDF object to add row to.
+        cell1_text (str): Text to add to cell.
+        cell2_text (str): Text to add to cell.
+        cell3_text (str): Text to add to cell.
+        cell1_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        cell2_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        cell3_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        page_width (float, optional): Width of page in given format (default inches). 
+            Defaults to 8.5.
+        margin (float, optional): Margin of page in given format (default inches). Defaults to 0.5.
+        border (Union[int, str], optional): Can be 0, 1, or string 
+            containing LRTB (Left, Right, Top, Bottom) in any order. Defaults to 1.
+        new_line (int, optional): Indicates if you want the final cell to require 
+            subsequent cell to a new line. Options are 0 (no new line) and 
+            1 (new line). Defaults to 1.
+        cell1_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell2_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell3_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell_height (float, optional):Height of cell. 
+            Uses whatever format PDF uses, by default in inches. Defaults to 0.5.
+        cell1_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.333.
+        cell2_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.333.
+        cell3_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.333.
+        r (int, optional): Color code for red (0-255). Defaults to 0.
+        g (int, optional): Color code for green (0-255). Defaults to 0.
+        b (int, optional): Color code for blue (0-255). Defaults to 0.
 
     Raises:
-        ValueError: _description_
+        ValueError: Given width percentages must add up to 1.
     """
     if cell1_fill or cell2_fill or cell3_fill:
         set_cell_fill_color(pdf, r, g, b)
@@ -320,34 +395,70 @@ def add_four_cell_row(
         g: int = 0,
         b: int = 0
 ) -> None:
-    """_summary_
+    """Add four cell row.
 
     Args:
-        pdf (_type_): _description_
-        cell1_text (_type_): _description_
-        cell2_text (_type_): _description_
-        cell3_text (_type_): _description_
-        cell4_text (_type_): _description_
-        cell1_align (str, optional): _description_. Defaults to "C".
-        cell2_align (str, optional): _description_. Defaults to "C".
-        cell3_align (str, optional): _description_. Defaults to "C".
-        cell4_align (str, optional): _description_. Defaults to "C".
-        page_width (int, optional): _description_. Defaults to 210.
-        margin (int, optional): _description_. Defaults to 10.
-        border (int, optional): _description_. Defaults to 1.
-        new_line (int, optional): _description_. Defaults to 1.
-        cell1_fill (bool, optional): _description_. Defaults to False.
-        cell2_fill (bool, optional): _description_. Defaults to False.
-        cell3_fill (bool, optional): _description_. Defaults to False.
-        cell4_fill (bool, optional): _description_. Defaults to False.
-        cell_height (int, optional): _description_. Defaults to 20.
-        cell1_width (float, optional): _description_. Defaults to 0.25.
-        cell2_width (float, optional): _description_. Defaults to 0.25.
-        cell3_width (float, optional): _description_. Defaults to 0.25.
-        cell4_width (float, optional): _description_. Defaults to 0.25.
+        pdf (FPDF): PDF object to add row to.
+        cell1_text (str): Text to add to cell.
+        cell2_text (str): Text to add to cell.
+        cell3_text (str): Text to add to cell.
+        cell4_text (str): Text to add to cell.
+        cell1_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        cell2_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        cell3_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        cell4_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        page_width (float, optional): Width of page in given format (default inches). 
+            Defaults to 8.5.
+        margin (float, optional): Margin of page in given format (default inches). Defaults to 0.5.
+        border (Union[int, str], optional): Can be 0, 1, or string 
+            containing LRTB (Left, Right, Top, Bottom) in any order. Defaults to 1.
+        new_line (int, optional): Indicates if you want the final cell to require 
+            subsequent cell to a new line. Options are 0 (no new line) and 
+            1 (new line). Defaults to 1.
+        cell1_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell2_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell3_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell4_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell_height (float, optional):Height of cell. 
+            Uses whatever format PDF uses, by default in inches. Defaults to 0.5.
+        cell1_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.25.
+        cell2_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.25.
+        cell3_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.25.
+        cell4_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.25.
+        r (int, optional): Color code for red (0-255). Defaults to 0.
+        g (int, optional): Color code for green (0-255). Defaults to 0.
+        b (int, optional): Color code for blue (0-255). Defaults to 0.
 
     Raises:
-        ValueError: _description_
+        ValueError: Given width percentages must add up to 1.
     """
     if cell1_fill or cell2_fill or cell3_fill or cell4_fill:
         set_cell_fill_color(pdf, r, g, b)
@@ -443,38 +554,81 @@ def add_five_cell_row(
         g: int = 0,
         b: int = 0
 ) -> None:
-    """_summary_
+    """Add five cell row.
 
     Args:
-        pdf (_type_): _description_
-        cell1_text (_type_): _description_
-        cell2_text (_type_): _description_
-        cell3_text (_type_): _description_
-        cell4_text (_type_): _description_
-        cell5_text (_type_): _description_
-        cell1_align (str, optional): _description_. Defaults to "C".
-        cell2_align (str, optional): _description_. Defaults to "C".
-        cell3_align (str, optional): _description_. Defaults to "C".
-        cell4_align (str, optional): _description_. Defaults to "C".
-        cell5_align (str, optional): _description_. Defaults to "C".
-        page_width (int, optional): _description_. Defaults to 210.
-        margin (int, optional): _description_. Defaults to 10.
-        border (int, optional): _description_. Defaults to 1.
-        new_line (int, optional): _description_. Defaults to 1.
-        cell1_fill (bool, optional): _description_. Defaults to False.
-        cell2_fill (bool, optional): _description_. Defaults to False.
-        cell3_fill (bool, optional): _description_. Defaults to False.
-        cell4_fill (bool, optional): _description_. Defaults to False.
-        cell5_fill (bool, optional): _description_. Defaults to False.
-        cell_height (int, optional): _description_. Defaults to 20.
-        cell1_width (float, optional): _description_. Defaults to 0.2.
-        cell2_width (float, optional): _description_. Defaults to 0.2.
-        cell3_width (float, optional): _description_. Defaults to 0.2.
-        cell4_width (float, optional): _description_. Defaults to 0.2.
-        cell5_width (float, optional): _description_. Defaults to 0.2.
+        pdf (FPDF): PDF object to add row to.
+        cell1_text (str): Text to add to cell.
+        cell2_text (str): Text to add to cell.
+        cell3_text (str): Text to add to cell.
+        cell4_text (str): Text to add to cell.
+        cell5_text (str): Text to add to cell.
+        cell1_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        cell2_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        cell3_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        cell4_align (str, optional): Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        cell5_align (str, optional):Set text alignment inside the cell. 
+            Possible values are: 
+            L : left align; 
+            C: center; 
+            X: center around current x position; 
+            R: right align. 
+            Defaults to "C".
+        page_width (float, optional): Width of page in given format (default inches). 
+            Defaults to 8.5.
+        margin (float, optional): Margin of page in given format (default inches). Defaults to 0.5.
+        border (Union[int, str], optional): Can be 0, 1, or string 
+            containing LRTB (Left, Right, Top, Bottom) in any order. Defaults to 1.
+        new_line (int, optional): Indicates if you want the final cell to require 
+            subsequent cell to a new line. Options are 0 (no new line) and 
+            1 (new line). Defaults to 1.
+        cell1_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell2_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell3_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell4_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell5_fill (bool, optional): Option to fill cell with set color. Defaults to False.
+        cell_height (float, optional):Height of cell. 
+            Uses whatever format PDF uses, by default in inches. Defaults to 0.5.
+        cell1_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.2.
+        cell2_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.2.
+        cell3_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.2.
+        cell4_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.2.
+        cell5_width (float, optional): Width of cell as a percentage of 
+            available space. Defaults to 0.2.
+        r (int, optional): Color code for red (0-255). Defaults to 0.
+        g (int, optional): Color code for green (0-255). Defaults to 0.
+        b (int, optional): Color code for blue (0-255). Defaults to 0.
 
     Raises:
-        ValueError: _description_
+        ValueError: Given width percentages must add up to 1.
     """
     if cell1_fill or cell2_fill or cell3_fill or cell4_fill or cell5_fill:
         set_cell_fill_color(pdf, r, g, b)
@@ -557,10 +711,10 @@ def export_pdf(
     pdf: FPDF,
     filename: str
 ) -> None:
-    """_summary_
+    """Exports PDF object to file.
 
     Args:
-        pdf (_type_): _description_
-        filename (_type_): _description_
+        pdf (FPDF): PDF object to export.
+        filename (str): Name of file to export to.
     """
     pdf.output(filename)
